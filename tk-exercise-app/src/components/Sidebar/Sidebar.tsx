@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { Link } from 'react-router-dom';
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -8,13 +9,12 @@ const SidebarContainer = styled.div`
   align-items: left;
   height: 100vh;
   width: 270px;
-  background-color: #252529;
+  background-color: #45454d;
   color: #fff;
 `;
 
 const SidebarMenu = styled.ul`
   display: flex;
-  align-items: center;
   flex-direction: column;
   list-style: none;
   width: 100%;
@@ -65,16 +65,19 @@ class Sidebar extends Component {
         </MenuBrand>
 
         <SidebarMenu>
-
-          <SidebarMenuItem>
-            <FastfoodIcon style={{ marginLeft: "20px" }} />
-            <SidebarMenuItemLabel>Ingredients</SidebarMenuItemLabel>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <FastfoodIcon style={{ marginLeft: "20px" }} />
-            <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
-          </SidebarMenuItem>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            <SidebarMenuItem>
+              <FastfoodIcon style={{ marginLeft: "20px" }} />
+              <SidebarMenuItemLabel>Ingredients</SidebarMenuItemLabel>
+            </SidebarMenuItem>
+          </Link>
+  
+          <Link to="/about" style={{ textDecoration: 'none', color: 'white' }}>
+            <SidebarMenuItem>
+              <FastfoodIcon style={{ marginLeft: "20px" }} />
+              <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
+            </SidebarMenuItem>
+          </Link>
 
         </SidebarMenu>
       </SidebarContainer>
