@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FastfoodIcon from '@material-ui/icons/Fastfood';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -65,19 +65,19 @@ class Sidebar extends Component {
         </MenuBrand>
 
         <SidebarMenu>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <NavLink exact activeClassName="active-link" to="/" style={{ textDecoration: 'none', color: 'white' }}>
             <SidebarMenuItem>
               <FastfoodIcon style={{ marginLeft: "20px" }} />
               <SidebarMenuItemLabel>Ingredients</SidebarMenuItemLabel>
             </SidebarMenuItem>
-          </Link>
+          </NavLink>
   
-          <Link to="/about" style={{ textDecoration: 'none', color: 'white' }}>
+          <NavLink exact activeClassName="active-link" to="/about" style={{ textDecoration: 'none', color: 'white' }}>
             <SidebarMenuItem>
               <FastfoodIcon style={{ marginLeft: "20px" }} />
               <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
             </SidebarMenuItem>
-          </Link>
+          </NavLink>
 
         </SidebarMenu>
       </SidebarContainer>

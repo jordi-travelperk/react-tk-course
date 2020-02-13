@@ -30,3 +30,7 @@
 .grid-content {
   grid-area: main;
 }
+
+.active-link {
+  background-color: #252529;
+}
