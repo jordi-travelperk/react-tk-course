@@ -1,48 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from "styled-components";
 
+import useInputState from '../../hooks/useInputState';
 
-interface IFormProps {
+type Props = {
+  primary?: boolean
+};
 
-}
+const Button = styled.button<Props>`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid #252529;
+  color: #252529;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
 
-interface IFormState {
-  name: string;
-}
+  ${props => props.primary && `
+    background: #252529;
+    color: white;
+  `}
+`;
 
-class CreateRecipeForm extends Component<IFormProps, IFormState> {
-  constructor(props: IFormProps) {
-    super(props);
-  
-    this.state = {
-      name: ''
-    };
-  }
+function CreateRecipeForm(props: { addRecipe: any })  {
+  const [ value, handleChange, reset ] = useInputState('');
 
-  handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ name: evt.target.value });
-  }
-
-  handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    this.setState({ name: '' });
+
+    props.addRecipe(value);
+    reset();
   }
 
-  render() {
-    return (
-      <div>
-        <h4>Create recipe</h4>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name"></label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={this.state.name}
-            onChange={this.handleChange} />
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h4>Create recipe</h4>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name"></label>
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange} />
+
+        <Button primary>Add recipe</Button>
+      </form>
+    </div>
+  );
 }
 
 export default CreateRecipeForm;

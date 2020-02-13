@@ -14,7 +14,7 @@ function App() {
           <Sidebar></Sidebar>
         </div>
         <div className="grid-header">
-          <h4>List ingredients</h4>
+          <h4 className="header-title">React TK Onboarding exercise</h4>
         </div>
         <div className="grid-content">
           <Suspense fallback={<div>Loading...</div>}>

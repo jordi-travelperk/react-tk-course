@@ -27,6 +27,11 @@
   box-shadow: 0 1px 0 0 #eaedf3;
 }
 
+.header-title {
+  text-align: left;
+  margin-left: 20px;
+}
+
 .grid-content {
   grid-area: main;
 }
