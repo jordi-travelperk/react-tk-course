@@ -20,6 +20,7 @@
 
 .grid-sidebar {
   grid-area: sidebar;
+  position: fixed;
 }
 
 .grid-header {

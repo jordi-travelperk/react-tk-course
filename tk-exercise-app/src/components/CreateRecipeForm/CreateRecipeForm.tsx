@@ -1,25 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
 
+import Button from '../../components/Button';
 import useInputState from '../../hooks/useInputState';
 
-type Props = {
-  primary?: boolean
-};
-
-const Button = styled.button<Props>`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #252529;
-  color: #252529;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-
-  ${props => props.primary && `
-    background: #252529;
-    color: white;
-  `}
-`;
 
 function CreateRecipeForm(props: { addRecipe: any })  {
   const [ value, handleChange, reset ] = useInputState('');

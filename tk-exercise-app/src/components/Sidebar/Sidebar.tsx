@@ -68,14 +68,14 @@ class Sidebar extends Component {
           <NavLink exact activeClassName="active-link" to="/" style={{ textDecoration: 'none', color: 'white' }}>
             <SidebarMenuItem>
               <FastfoodIcon style={{ marginLeft: "20px" }} />
-              <SidebarMenuItemLabel>Ingredients</SidebarMenuItemLabel>
+              <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
             </SidebarMenuItem>
           </NavLink>
   
           <NavLink exact activeClassName="active-link" to="/about" style={{ textDecoration: 'none', color: 'white' }}>
             <SidebarMenuItem>
               <FastfoodIcon style={{ marginLeft: "20px" }} />
-              <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
+              <SidebarMenuItemLabel>About</SidebarMenuItemLabel>
             </SidebarMenuItem>
           </NavLink>
 
