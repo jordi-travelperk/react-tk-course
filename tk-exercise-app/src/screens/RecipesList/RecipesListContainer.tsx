@@ -10,36 +10,22 @@ import CreateRecipeForm from '../../components/CreateRecipeForm';
 import RecipeList from '../../components/RecipeList';
 import { Recipe } from 'src/data/recipes/types';
 import { getRecipesFromAPI } from '../../data/recipes/api';
-
+import useRecipeState from '../../hooks/useRecipes';
 
 function RecipesListContainer() {
   const history = useHistory();
 
-  // const recipesFromAPI = await getRecipesFromAPI();
-  const initialRecipes: Recipe[] = [
-    { id: 1, name: 'Recipe 1', description: 'recipe1 description', ingredients: [{ name: 'Pizza 1'}] },
-    { id: 2, name: 'Recipe 2', description: 'recipe2 description', ingredients: [{ name: 'Pizza 2'}] },
-    { id: 3, name: 'Recipe 3', description: 'recipe3 description', ingredients: [{ name: 'Pizza 3'}] }
-  ];
-
-  const [ recipes, setRecipes ] = useState<any>([]);
+  const { recipes, setRecipes, addRecipe, removeRecipe } = useRecipeState([]);
   const [ open, setOpen ] = useState(false);
-  const [ recipeToDelete, setRecipeToDelete ] = useState<number | null>(null);
+  const [ recipeToDelete, setRecipeToDelete ] = useState<number>();
 
   useEffect(() => {
     getRecipesFromAPI()
       .then(res => setRecipes(res));
-  }, [recipes]);
-
-  const addRecipe = (recipeName: string) => {
-    setRecipes([
-      { id: 99, name: recipeName, description: 'Random', ingredients: [] },
-      ...recipes
-    ]);
-  }
+  }, []);
 
   const deleteRecipe = () => {
-    setRecipes(recipes.filter((recipe: Recipe) => recipe.id !== recipeToDelete));
+    if (recipeToDelete) removeRecipe(recipeToDelete);
     handleClose();
   }
 
@@ -79,7 +65,6 @@ function RecipesListContainer() {
       </DialogActions>
     </Dialog>
   );
-
 
   return (
     <div>

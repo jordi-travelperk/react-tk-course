@@ -6,3 +6,9 @@ export const getRecipesFromAPI = (): Promise<Recipe[]> => {
     prefix: '',
   });
 }
+
+export const getRecipeFromAPI = (recipeId: number): Promise<Recipe> => {
+  return requestAll(`recipes/${recipeId}`, {
+    prefix: '',
+  });
+}

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { NavLink } from 'react-router-dom';
 
+import useRecipeState from '../../hooks/useRecipes';
+
 const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,34 +57,49 @@ const MenuLogo = styled.img`
   height: 60px;
 `;
 
-class Sidebar extends Component {
-  render() {
-    return (
-      <SidebarContainer>
-        <MenuBrand>
-          <MenuLogo src={window.location.origin + '/tk.png'} />
-          <h4>Travelperk Recipe App</h4>
-        </MenuBrand>
+const ItemCounter = styled.p`
+  font-family: "Roboto", sans-serif;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 4px;
 
-        <SidebarMenu>
-          <NavLink exact activeClassName="active-link" to="/" style={{ textDecoration: 'none', color: 'white' }}>
-            <SidebarMenuItem>
-              <FastfoodIcon style={{ marginLeft: "20px" }} />
-              <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
-            </SidebarMenuItem>
-          </NavLink>
-  
-          <NavLink exact activeClassName="active-link" to="/about" style={{ textDecoration: 'none', color: 'white' }}>
-            <SidebarMenuItem>
-              <FastfoodIcon style={{ marginLeft: "20px" }} />
-              <SidebarMenuItemLabel>About</SidebarMenuItemLabel>
-            </SidebarMenuItem>
-          </NavLink>
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
+  margin-left: 20px;
+`;
 
-        </SidebarMenu>
-      </SidebarContainer>
-    );
-  }
+function Sidebar() {
+  const { recipes } = useRecipeState([]);
+
+  return (
+    <SidebarContainer>
+      <MenuBrand>
+        <MenuLogo src={window.location.origin + '/tk.png'} />
+        <h4>Travelperk Recipe App</h4>
+      </MenuBrand>
+
+      <SidebarMenu>
+        <NavLink exact activeClassName="active-link" to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <SidebarMenuItem>
+            <FastfoodIcon style={{ marginLeft: "20px" }} />
+            <SidebarMenuItemLabel>Recipes</SidebarMenuItemLabel>
+            <ItemCounter>{recipes.length}</ItemCounter>
+          </SidebarMenuItem>
+        </NavLink>
+
+        <NavLink exact activeClassName="active-link" to="/about" style={{ textDecoration: 'none', color: 'white' }}>
+          <SidebarMenuItem>
+            <FastfoodIcon style={{ marginLeft: "20px" }} />
+            <SidebarMenuItemLabel>About</SidebarMenuItemLabel>
+          </SidebarMenuItem>
+        </NavLink>
+
+      </SidebarMenu>
+    </SidebarContainer>
+  );
 }
 
 export default Sidebar;

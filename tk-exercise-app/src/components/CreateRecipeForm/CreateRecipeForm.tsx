@@ -5,12 +5,13 @@ import useInputState from '../../hooks/useInputState';
 
 
 function CreateRecipeForm(props: { addRecipe: any })  {
-  const [ value, handleChange, reset ] = useInputState('');
+  const [ name, handleNameChange, reset ] = useInputState('');
+  const [ description, handleDescritionChange ] = useInputState('');
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    props.addRecipe(value);
+    props.addRecipe(name, description);
     reset();
   }
 
@@ -21,8 +22,16 @@ function CreateRecipeForm(props: { addRecipe: any })  {
         <label htmlFor="name"></label>
         <input
           type="text"
-          value={value}
-          onChange={handleChange} />
+          value={name}
+          placeholder="Name your recipe..."
+          onChange={handleNameChange} />
+
+        <label htmlFor="description"></label>
+        <input
+          type="text"
+          value={description}
+          placeholder="Recipe description..."
+          onChange={handleDescritionChange} />
 
         <Button primary>Add recipe</Button>
       </form>
