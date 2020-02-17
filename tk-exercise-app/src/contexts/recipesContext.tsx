@@ -6,7 +6,7 @@ type Context = {
   recipes: Recipe[],
   addRecipe: (recipeName: string, recipeDescription?: string) => void,
   removeRecipe: (recipeId: number) => void,
-  setRecipes: any
+  setRecipes: (recipes: Recipe[]) => void
 }
 
 export const RecipesContext = createContext<Context>({

@@ -1,6 +1,5 @@
  
 import { useState, useEffect } from 'react';
-import { getRecipesFromAPI } from '../data/recipes/api';
 import { Recipe } from 'src/data/recipes/types';
 
 export default (initialRecipes: Recipe[]) => {
