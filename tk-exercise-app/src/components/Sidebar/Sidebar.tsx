@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { NavLink } from 'react-router-dom';
 
-import useRecipeState from '../../hooks/useRecipes';
+import { RecipesContext } from '../../contexts/recipesContext';
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const ItemCounter = styled.p`
 `;
 
 function Sidebar() {
-  const { recipes } = useRecipeState([]);
+  const { recipes } = useContext(RecipesContext);
 
   return (
     <SidebarContainer>

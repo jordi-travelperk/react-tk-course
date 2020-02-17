@@ -30,7 +30,7 @@ function RecipeList(props: { recipes: Recipe[], deleteRecipe: any, goToRecipeDet
         ? props.recipes.map((recipe: Recipe) => (
           <RecipesContainer key={recipe.id}>
             <RecipeItem>
-              <h4>Name: {recipe.name}</h4>
+              <h4>#{recipe.id} Name: {recipe.name}</h4>
               <p>Description: {recipe.description || 'No description'}</p>
               <p>
                 Ingredients: {recipe.ingredients.map((ingredient) =>

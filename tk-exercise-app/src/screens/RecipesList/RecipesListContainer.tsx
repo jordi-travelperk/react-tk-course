@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,14 +8,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import CreateRecipeForm from '../../components/CreateRecipeForm';
 import RecipeList from '../../components/RecipeList';
-import { Recipe } from 'src/data/recipes/types';
 import { getRecipesFromAPI } from '../../data/recipes/api';
-import useRecipeState from '../../hooks/useRecipes';
+import { RecipesContext } from '../../contexts/recipesContext';
 
 function RecipesListContainer() {
   const history = useHistory();
 
-  const { recipes, setRecipes, addRecipe, removeRecipe } = useRecipeState([]);
+  const { recipes, setRecipes, addRecipe, removeRecipe } = useContext(RecipesContext);
   const [ open, setOpen ] = useState(false);
   const [ recipeToDelete, setRecipeToDelete ] = useState<number>();
 
