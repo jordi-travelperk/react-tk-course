@@ -7,9 +7,8 @@ import EditIcon from '@material-ui/icons/Create';
 import shortid from 'shortid';
 
 const RecipesContainer = styled.li<any>`
-  width: 100%;
-  border: 1px solid red;
-  padding: 40px;
+  width: 80%;
+  margin: 20px 0px;
   list-style: none;
 `;
 
@@ -21,7 +20,7 @@ const RecipeItem = styled.div<any>`
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 10px;
+  padding: 20px;
 `;
 
 const IconWrapper = styled.div<any>`
@@ -32,32 +31,30 @@ function RecipeCard(props: { recipe: Recipe, deleteRecipe: any, goToRecipeDetail
   const recipe: Recipe = props.recipe;
 
   return (
-    <div>
-      <RecipesContainer>
-        <RecipeItem>
-          {console.log(`Rendering RecipeItem ${recipe.id}`)}
-          <h4>#{recipe.id} Name: {recipe.name}</h4>
-          <p>Description: {recipe.description || 'No description'}</p>
-          <ul>
-            Ingredients: {recipe.ingredients.map((ingredient) =>
-              <li key={shortid.generate()}>{ingredient.name}</li>
-            )}
-          </ul>
+    <RecipesContainer>
+      <RecipeItem>
+        {console.log(`Rendering RecipeItem ${recipe.id}`)}
+        <h4>#{recipe.id} Name: {recipe.name}</h4>
+        <p>Description: {recipe.description || 'No description'}</p>
+        <ul>
+          Ingredients: {recipe.ingredients.map((ingredient) =>
+            <li key={shortid.generate()}>{ingredient.name}</li>
+          )}
+        </ul>
 
-          <IconWrapper>
-            <DeleteForeverIcon
-              style={{ cursor: 'pointer', marginLeft: 20 }}
-              onClick={() => props.deleteRecipe(recipe.id)} />
-            <VisibilityIcon
-              style={{ cursor: 'pointer', marginLeft: 20 }}
-              onClick={() => props.goToRecipeDetail(recipe.id)} />
-            <EditIcon
-              style={{ cursor: 'pointer', marginLeft: 20 }}
-              onClick={() => props.editRecipe(recipe.id)} />
-          </IconWrapper>
-        </RecipeItem>
-      </RecipesContainer>
-    </div>
+        <IconWrapper>
+          <DeleteForeverIcon
+            style={{ cursor: 'pointer', marginLeft: 20 }}
+            onClick={() => props.deleteRecipe(recipe.id)} />
+          <VisibilityIcon
+            style={{ cursor: 'pointer', marginLeft: 20 }}
+            onClick={() => props.goToRecipeDetail(recipe.id)} />
+          <EditIcon
+            style={{ cursor: 'pointer', marginLeft: 20 }}
+            onClick={() => props.editRecipe(recipe.id)} />
+        </IconWrapper>
+      </RecipeItem>
+    </RecipesContainer>
   );
 }
 
