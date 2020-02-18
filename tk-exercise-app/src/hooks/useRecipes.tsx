@@ -17,7 +17,6 @@ export default (initialRecipes: Recipe[]) => {
       setRecipes(recipes.filter((recipe: Recipe) => recipe.id !== recipeId));
     },
     editRecipe: (recipeId: number, recipeToEdit: Recipe) => {
-      console.log('recipeToEdit: ', recipeToEdit);
       setRecipes(recipes.map((recipe: Recipe) => {
         if (recipe.id === recipeId) {
           return recipeToEdit;

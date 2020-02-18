@@ -93,7 +93,7 @@ function RecipesListContainer() {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{"Do you want to delete this recipe?"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Do you want to delete this recipe?'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           This action will remove the recipe permanently from the database.

@@ -72,7 +72,7 @@ const ItemCounter = styled.p`
 `;
 
 function Sidebar() {
-  const { recipes } = useContext(RecipesContext);
+  const {recipes} = useContext(RecipesContext);
 
   return (
     <SidebarContainer>
