@@ -1,5 +1,5 @@
  
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Recipe } from 'src/data/recipes/types';
 
 export default (initialRecipes: Recipe[]) => {
@@ -7,14 +7,24 @@ export default (initialRecipes: Recipe[]) => {
   return {
     recipes,
     setRecipes,
-    addRecipe: (recipeName: string, recipeDescription?: string) => {
+    addRecipe: (recipe: Recipe) => {
       setRecipes([
-        { id: 99, name: recipeName, description: recipeDescription || '', ingredients: [] },
+        { id: recipe.id, name: recipe.name, description: recipe.description || '', ingredients: recipe.ingredients },
         ...recipes
       ])
     },
     removeRecipe: (recipeId: number) => {
       setRecipes(recipes.filter((recipe: Recipe) => recipe.id !== recipeId));
+    },
+    editRecipe: (recipeId: number, recipeToEdit: Recipe) => {
+      console.log('recipeToEdit: ', recipeToEdit);
+      setRecipes(recipes.map((recipe: Recipe) => {
+        if (recipe.id === recipeId) {
+          return recipeToEdit;
+        }
+
+        return recipe;
+      }))
     }
   };
 }

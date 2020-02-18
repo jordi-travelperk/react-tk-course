@@ -1,41 +1,80 @@
 import React from 'react';
-
+import styled from 'styled-components'
 import Button from '../../components/Button';
 import useInputState from '../../hooks/useInputState';
+import { Recipe } from '../../data/recipes/types';
 
+const FormContainer = styled.form<any>`
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+`;
 
-function CreateRecipeForm(props: { addRecipe: any })  {
-  const [ name, handleNameChange, reset ] = useInputState('');
-  const [ description, handleDescritionChange ] = useInputState('');
+const Input = styled.input<any>`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 12px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;
+
+function CreateRecipeForm(props: { addRecipe: any, recipe: Recipe | null, editRecipe: any })  {
+  const [ name, handleNameChange, resetName ] = useInputState(props.recipe?.name || '');
+  const [ description, handleDescritionChange, resetDescription ] = useInputState(props.recipe?.description || '');
+  const [ ingredients, handleIngredientsChange, resetIngredients ] = useInputState(props.recipe?.ingredients.map(ingredient => ingredient.name).join(',') || '');
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    props.addRecipe(name, description);
-    reset();
+    if (props.recipe) {
+      props.editRecipe(props.recipe.id, {
+        name,
+        description,
+        ingredients: ingredients.split(',').map((ingredient: string) => ({ name: ingredient }))
+      });
+    } else {
+      props.addRecipe({
+        name,
+        description,
+        ingredients: ingredients.split(',').map((ingredient: string) => ({ name: ingredient }))
+      });
+    }
+
+    resetName();
+    resetDescription();
+    resetIngredients();
   }
 
   return (
-    <div>
-      <h4>Create recipe</h4>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name"></label>
-        <input
+      <FormContainer onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <Input
           type="text"
           value={name}
           placeholder="Name your recipe..."
           onChange={handleNameChange} />
 
-        <label htmlFor="description"></label>
-        <input
+        <label htmlFor="description">Description</label>
+        <Input
           type="text"
           value={description}
           placeholder="Recipe description..."
           onChange={handleDescritionChange} />
 
-        <Button primary>Add recipe</Button>
-      </form>
-    </div>
+        <label htmlFor="description">Ingredients (comma separated)</label>
+        <Input
+          type="text"
+          value={ingredients}
+          placeholder="Ingredients..."
+          onChange={handleIngredientsChange} />
+
+        <Button primary>{props.recipe ? 'Edit recipe' : 'Add recipe'}</Button>
+      </FormContainer>
   );
 }
 
