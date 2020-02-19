@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback, memo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -149,4 +149,4 @@ function RecipesListContainer() {
   );
 }
 
-export default memo(RecipesListContainer);
+export default RecipesListContainer;

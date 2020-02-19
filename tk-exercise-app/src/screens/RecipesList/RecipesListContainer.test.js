@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, wait, fireEvent, waitForElement, within } from '@testing-library/react'
+import { render, cleanup, wait, fireEvent, waitForElement, within, waitForDomChange } from '@testing-library/react'
 import RecipesListContainer from '.';
 import { getRecipesFromAPI } from '../../data/recipes/api';
 import { recipe as recipeFabricator } from '../../fabricators/recipes';
@@ -38,7 +38,7 @@ describe.only('<RecipeListContainer>', () => {
 
   it.only('should load and show recipes coming from the API', async () => {
     const recipes = recipeFabricator.times(10);
-    getRecipesFromAPI.mockResolvedValueOnce({ recipes });
+    getRecipesFromAPI.mockResolvedValueOnce(recipes);
 
     const history = createHistory();
     history.push = jest.fn();
@@ -52,7 +52,7 @@ describe.only('<RecipeListContainer>', () => {
     expect(getRecipesFromAPI).toHaveBeenCalledWith();
 
     console.log('Wait for element to render: ', recipes[0].name);
-    await waitForElement(() => getByText(/List of recipes/));
+    await waitForElement(() => getByText('List of recipes'));
     console.log('awaited, now check!!');
     recipes.forEach(recipe => validateRecipeCard({ recipe, getByTestId }))
   });

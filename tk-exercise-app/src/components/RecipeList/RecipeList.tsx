@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { Recipe } from 'src/data/recipes/types';
@@ -36,4 +36,4 @@ function RecipeList(props: { deleteRecipe: any, goToRecipeDetail: any, editRecip
   );
 }
 
-export default memo(RecipeList);
+export default RecipeList;
