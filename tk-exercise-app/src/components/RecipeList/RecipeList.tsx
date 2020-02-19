@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, memo } from 'react';
 import styled from 'styled-components';
 
 import { Recipe } from 'src/data/recipes/types';
 import RecipeCard from '../../components/RecipeCard'
+import { RecipesContext } from '../../contexts/recipesContext';
 
 const RecipesWrapper = styled.div<any>`
   display: flex;
@@ -10,22 +11,29 @@ const RecipesWrapper = styled.div<any>`
   align-items: center;
 `;
 
-function RecipeList(props: { recipes: Recipe[], deleteRecipe: any, goToRecipeDetail: any, editRecipe: any })  {
+function RecipeList(props: { deleteRecipe: any, goToRecipeDetail: any, editRecipe: any })  {
+  const { recipes } = useContext(RecipesContext);
+  
   return (
     <RecipesWrapper>
-      {props?.recipes.length
-        ? props.recipes.map((recipe: Recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            recipe={recipe}
-            deleteRecipe={props.deleteRecipe}
-            goToRecipeDetail={props.goToRecipeDetail}
-            editRecipe={props.editRecipe} />
-        ))
+      {console.log('Rendering RecipesWrapper with recipes: ', recipes.length)}
+      {recipes.length
+        ? <div>
+            <p>List of recipes</p>
+            {recipes.map((recipe: Recipe) => (
+              <RecipeCard
+                data-testid={`RecipeCard-${recipe.id}`}
+                key={recipe.id}
+                recipe={recipe}
+                deleteRecipe={props.deleteRecipe}
+                goToRecipeDetail={props.goToRecipeDetail}
+                editRecipe={props.editRecipe} />
+            ))}
+          </div>
         : <h4>No recipes yet! :(</h4>
       }
     </RecipesWrapper>
   );
 }
 
-export default RecipeList;
+export default memo(RecipeList);

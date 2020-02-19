@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback, memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,7 +10,7 @@ import CreateRecipeForm from '../../components/CreateRecipeForm';
 import RecipeList from '../../components/RecipeList';
 import { getRecipesFromAPI, createNewRecipe, deleteRecipeById, editRecipeById } from '../../data/recipes/api';
 import { Recipe } from '../../data/recipes/types';
-import { RecipesContext } from '../../contexts/recipesContext';
+import { RecipesContext, RecipesDispatchContext } from '../../contexts/recipesContext';
 import useInputState from '../../hooks/useInputState';
 import SearchInput from '../../components/SearchInput';
 import Button from '../../components/Button';
@@ -18,17 +18,22 @@ import Button from '../../components/Button';
 function RecipesListContainer() {
   const history = useHistory();
 
-  const { recipes, setRecipes, addRecipe, removeRecipe, editRecipe } = useContext(RecipesContext);
-  const [ open, setOpen ] = useState(false);
+  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { addRecipe, removeRecipe, editRecipe } = useContext(RecipesDispatchContext);
+
+  const [ open, setOpen ] = useState<boolean>(false);
   const [ recipeToDelete, setRecipeToDelete ] = useState<number>();
   const [ searchText, handleSearchTextChange, resetSearchText ] = useInputState('');
-  const [ openCreateRecipe, setOpenCreateRecipe ] = useState(false);
+  const [ openCreateRecipe, setOpenCreateRecipe ] = useState<boolean>(false);
 
   const [ recipeToEdit, setRecipeToEdit ] = useState();
 
   useEffect(() => {
     getRecipesFromAPI()
-      .then(res => setRecipes(res));
+      .then(res => {
+        console.log('HERE getRecipesFromAPI: ', res);
+        return setRecipes(res);
+      });
   }, []);
 
   const deleteRecipe = () => {
@@ -137,12 +142,11 @@ function RecipesListContainer() {
         value={searchText}
         placeholder="Search for a recipe..." />
       <RecipeList
-        recipes={recipes}
-        deleteRecipe={(id: number) => handleClickOpen(id)}
-        goToRecipeDetail={(id: number) => goToRecipeDetail(id)}
-        editRecipe={(id: number) => handleOpenCreateRecipe(id)} />
+        deleteRecipe={handleClickOpen}
+        goToRecipeDetail={goToRecipeDetail}
+        editRecipe={handleOpenCreateRecipe} />
     </div>
   );
 }
 
-export default RecipesListContainer;
+export default memo(RecipesListContainer);

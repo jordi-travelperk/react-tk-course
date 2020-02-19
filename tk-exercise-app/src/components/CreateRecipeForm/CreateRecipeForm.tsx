@@ -49,7 +49,7 @@ function CreateRecipeForm(props: { addRecipe: any, recipe: Recipe | null, editRe
     resetDescription();
     resetIngredients();
   }
-
+  console.log('CreateForm render');
   return (
       <FormContainer onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>

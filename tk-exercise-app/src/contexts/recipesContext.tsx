@@ -4,15 +4,21 @@ import { Recipe } from 'src/data/recipes/types';
 
 type Context = {
   recipes: Recipe[],
+  setRecipes: (recipes: Recipe[]) => void,
+}
+
+type DispatchContext = {
   addRecipe: (recipe: Recipe) => void,
   removeRecipe: (recipeId: number) => void,
-  setRecipes: (recipes: Recipe[]) => void,
   editRecipe: (recipeId: number, recipe: Recipe) => void
 }
 
 export const RecipesContext = createContext<Context>({
   recipes: [],
-  setRecipes: () => {},
+  setRecipes: () => {}
+});
+
+export const RecipesDispatchContext = createContext<DispatchContext>({
   addRecipe: () => {},
   removeRecipe: () => {},
   editRecipe: () => {}
@@ -22,8 +28,10 @@ export function RecipesProvider(props: any) {
   const { recipes, addRecipe, removeRecipe, setRecipes, editRecipe } = useRecipeState([]);
 
   return (
-    <RecipesContext.Provider value={{ recipes, addRecipe, removeRecipe, setRecipes, editRecipe }}>
-      {props.children}
+    <RecipesContext.Provider value={{ recipes, setRecipes }}>
+      <RecipesDispatchContext.Provider value={{ addRecipe, removeRecipe, editRecipe }}>
+        {props.children}
+      </RecipesDispatchContext.Provider>
     </RecipesContext.Provider>
   );
 }
