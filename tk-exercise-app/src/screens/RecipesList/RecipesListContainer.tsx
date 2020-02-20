@@ -141,7 +141,9 @@ function RecipesListContainer() {
         onChange={handleSearch}
         value={searchText}
         placeholder="Search for a recipe..." />
+      {console.log('About to render <RecipeList/>')}
       <RecipeList
+        recipes={recipes}
         deleteRecipe={handleClickOpen}
         goToRecipeDetail={goToRecipeDetail}
         editRecipe={handleOpenCreateRecipe} />
