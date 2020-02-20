@@ -11,8 +11,9 @@ const RecipesWrapper = styled.div<any>`
   align-items: center;
 `;
 
-function RecipeList(props: { deleteRecipe: any, goToRecipeDetail: any, editRecipe: any })  {
-  const { recipes } = useContext(RecipesContext);
+function RecipeList(props: { recipes: Recipe[], deleteRecipe: any, goToRecipeDetail: any, editRecipe: any })  {
+  // const { recipes } = useContext(RecipesContext);
+  const recipes = props.recipes;
   
   return (
     <RecipesWrapper>

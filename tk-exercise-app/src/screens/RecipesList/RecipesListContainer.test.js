@@ -43,8 +43,8 @@ describe.only('<RecipeListContainer>', () => {
     const history = createHistory();
     history.push = jest.fn();
 
-    const { getByText, getByTestId } = setupComponent({ history, recipes });
-
+    const { getByText, getByTestId, debug } = setupComponent({ history, recipes });
+    debug();
     expect(getByText('No recipes yet! :(')).toBeInTheDocument();
 
     // Make sure that API has been called correctly
@@ -52,7 +52,10 @@ describe.only('<RecipeListContainer>', () => {
     expect(getRecipesFromAPI).toHaveBeenCalledWith();
 
     console.log('Wait for element to render: ', recipes[0].name);
-    await waitForElement(() => getByText('List of recipes'));
+    // await waitForElement(() => getByText('List of recipes'));
+    await wait(() => {
+      expect(getByText(/List of recipes/)).toBeInTheDocument()
+    })
     console.log('awaited, now check!!');
     recipes.forEach(recipe => validateRecipeCard({ recipe, getByTestId }))
   });
