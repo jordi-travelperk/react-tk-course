@@ -31,7 +31,7 @@ function RecipesListContainer() {
   useEffect(() => {
     getRecipesFromAPI()
       .then(res => {
-        console.log('HERE getRecipesFromAPI!: ', res);
+        console.log('HERE getRecipesFromAPI! -> ', res);
         return setRecipes(res);
       });
   }, []);
