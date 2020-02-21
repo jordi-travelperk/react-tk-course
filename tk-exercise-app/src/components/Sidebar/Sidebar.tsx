@@ -43,7 +43,7 @@ const SidebarMenuItemLabel = styled.p`
   font-weight: 600;
   line-height: 1.3;
   text-align: left;
-  padding: 14px 0px;
+  padding: 12px 0px;
   color: #ffffff;
   margin-left: 20px;
 `;
